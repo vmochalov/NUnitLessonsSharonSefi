@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitLessonsSharonSefi", "NUnitLessonsSharonSefi.csproj", "{55A6CB00-3D21-4D4D-8D43-297342C14A08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55A6CB00-3D21-4D4D-8D43-297342C14A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A6CB00-3D21-4D4D-8D43-297342C14A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A6CB00-3D21-4D4D-8D43-297342C14A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A6CB00-3D21-4D4D-8D43-297342C14A08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F2ECA60-C9EA-4D99-AD87-20F37D0A5D20}
+	EndGlobalSection
+EndGlobal
