@@ -24,6 +24,42 @@ namespace NUnitLessonsSharonSefi
             driver.Navigate().GoToUrl("https://www.saucedemo.com/");
         }
 
+        ///////////////////////////////////////////////////////////////////////
+        ///
+        /// Rough draft of TestCaseSource
+        /// ....Not working :(
+        /// 
+        ///////////////////////////////////////////////////////////////////////
+
+
+        public static IEnumerable<TestCaseData> ItemTestCases
+        {
+            get
+            {
+                // B
+                //yield return new TestCaseData(new Item
+                //{
+                //    itemName = "group",
+                //    itemDesc = "description",
+                //    itemPrice = 11.11,
+                //    itemImage = "dsdwadqdw",
+                //    hasAddToCart = true
+                //}).SetName("ThisIsNameOfTest1");
+
+                TestCaseData testCaseData = new TestCaseData(new Item("Sauce Labs Backpack", "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.", 29.99, "https://www.saucedemo.com/static/media/sauce-backpack-1200x1500.34e7aa42.jpg").SetName("Test Backpack");
+                yield return testCaseData;
+               
+            }
+        }
+
+
+        [TestCaseSource("ItemTestCases")]
+
+        [Description("Dynamic group crate tests cases with image compare ")]
+
+        //////////////////////////////////////////////////////////////////////////
+
+
         [TearDown]
         public void AnyException()
         {
