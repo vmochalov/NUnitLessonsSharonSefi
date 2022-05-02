@@ -24,44 +24,44 @@ namespace NUnitLessonsSharonSefi
             driver.Navigate().GoToUrl("https://www.saucedemo.com/");
         }
 
-        ///////////////////////////////////////////////////////////////////////
-        ///
-        /// Rough draft of TestCaseSource
-        /// ....Not working :(
-        /// 
-        ///////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        /////
+        ///// Rough draft of TestCaseSource
+        ///// ....Not working :(
+        ///// 
+        /////////////////////////////////////////////////////////////////////////
 
 
-        public static IEnumerable<TestCaseData> ItemTestCases
-        {
-            get
-            {
-                // B
-                //yield return new TestCaseData(new Item
-                //{
-                //    itemName = "group",
-                //    itemDesc = "description",
-                //    itemPrice = 11.11,
-                //    itemImage = "dsdwadqdw",
-                //    hasAddToCart = true
-                //}).SetName("ThisIsNameOfTest1");
+        //public static IEnumerable<TestCaseData> ItemTestCases
+        //{
+        //    get
+        //    {
+        //        // B
+        //        //yield return new TestCaseData(new Item
+        //        //{
+        //        //    itemName = "group",
+        //        //    itemDesc = "description",
+        //        //    itemPrice = 11.11,
+        //        //    itemImage = "dsdwadqdw",
+        //        //    hasAddToCart = true
+        //        //}).SetName("ThisIsNameOfTest1");
 
                 
-                //TODO   Fix ) 
-                TestCaseData testCaseData = new TestCaseData(new Item("Sauce Labs Backpack",
-                    "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
-                    29.99, "https://www.saucedemo.com/static/media/sauce-backpack-1200x1500.34e7aa42.jpg").SetName("Test Backpack");
-                yield return testCaseData;
+        //        //TODO   Fix ) 
+        //        TestCaseData testCaseData = new TestCaseData(new Item("Sauce Labs Backpack",
+        //            "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
+        //            29.99, "https://www.saucedemo.com/static/media/sauce-backpack-1200x1500.34e7aa42.jpg")).SetName("Test Backpack");
+        //        yield return testCaseData;
                
-            }
-        }
+        //    }
+        //}
 
 
-        [TestCaseSource("ItemTestCases")]
+        //[TestCaseSource("ItemTestCases")]
 
-        [Description("Dynamic group crate tests cases with image compare ")]
+        //[Description("Dynamic group crate tests cases with image compare ")]
 
-        //////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////
 
 
         [TearDown]
@@ -81,24 +81,39 @@ namespace NUnitLessonsSharonSefi
         [OneTimeTearDown]
         public void QuitDriver()
         {
-            
-            LoginProcess("123", "yuda");
             driver.Quit();
         }
 
         /// <summary>
-        /// This is login funcation 
+        /// This is login function
         /// </summary>
-        /// <param name="password2">user passrod only numbers</param>
-        /// <param name="userName">only englis names</param>
-        public void LoginProcess(string password2 , string userName)
+        /// <param name="userName">User name</param>
+        /// <param name="password">User password</param>
+        public void LoginProcess(string userName , string password)
         {
-            var username = driver.FindElement(By.XPath("//input[@id='user-name']"));
-            username.SendKeys("standard_user");
-            var password = driver.FindElement(By.XPath("//input[@id='password']"));
-            password.SendKeys("secret_sauce");
+            var userNameField = driver.FindElement(By.XPath("//input[@id='user-name']"));
+            userNameField.SendKeys(userName);
+            var passwordField = driver.FindElement(By.XPath("//input[@id='password']"));
+            passwordField.SendKeys(password);
             var loginButton = driver.FindElement(By.XPath("//input[@id='login-button']"));
             loginButton.Click();
+        }
+
+        [TestCase("Sauce Labs Backpack")]
+        [TestCase("Sauce Labs Bolt T-Shirt")]
+        [TestCase("BullShit that not exist")]
+        public void AddItemToCartByName(string item)
+        {
+            LoginProcess("standard_user", "secret_sauce");
+            var itemName = driver.FindElement(By.XPath("//div[normalize-space()='" + item + "']"));
+            var itemNameText = itemName.Text.ToLower();
+            var itemNameTextWithCart = "add to cart " + itemNameText;
+            var itemNameTextWithCartAndDash = itemNameTextWithCart.Replace(" ", "-");
+            var addToCartButton = driver.FindElement(By.Id(itemNameTextWithCartAndDash));
+            addToCartButton.Click();
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+            var isShoppingCartBadgeExist = driver.FindElement(By.XPath("//span[@class='shopping_cart_badge']")).Displayed;
+            Assert.IsTrue(isShoppingCartBadgeExist, "Failed add to cart item: " + item);
         }
     }
 }
