@@ -46,7 +46,11 @@ namespace NUnitLessonsSharonSefi
                 //    hasAddToCart = true
                 //}).SetName("ThisIsNameOfTest1");
 
-                TestCaseData testCaseData = new TestCaseData(new Item("Sauce Labs Backpack", "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.", 29.99, "https://www.saucedemo.com/static/media/sauce-backpack-1200x1500.34e7aa42.jpg").SetName("Test Backpack");
+                
+                //TODO   Fix ) 
+                TestCaseData testCaseData = new TestCaseData(new Item("Sauce Labs Backpack",
+                    "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
+                    29.99, "https://www.saucedemo.com/static/media/sauce-backpack-1200x1500.34e7aa42.jpg").SetName("Test Backpack");
                 yield return testCaseData;
                
             }
@@ -77,11 +81,17 @@ namespace NUnitLessonsSharonSefi
         [OneTimeTearDown]
         public void QuitDriver()
         {
+            
+            LoginProcess("123", "yuda");
             driver.Quit();
         }
 
-        // Login function
-        public void LoginProcess()
+        /// <summary>
+        /// This is login funcation 
+        /// </summary>
+        /// <param name="password2">user passrod only numbers</param>
+        /// <param name="userName">only englis names</param>
+        public void LoginProcess(string password2 , string userName)
         {
             var username = driver.FindElement(By.XPath("//input[@id='user-name']"));
             username.SendKeys("standard_user");
