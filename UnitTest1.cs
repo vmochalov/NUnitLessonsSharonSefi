@@ -113,13 +113,23 @@ namespace NUnitLessonsSharonSefi
                     "helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.", 9.99);
                 yield return new TestCaseData("Sauce Labs Fleece Jacket", "It's not every day that you come across a " +
                     "midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.", 49.99);
+                yield return new TestCaseData("Some bullshit", "Bullshit description", 52.11);
             }
         }
         [TestCaseSource(nameof(ItemsWithDescriptionsAndPrices))]
         public void AddItemToCartByName(string item, string itemDescription, double itemPrice)
         {
             LoginProcess("standard_user", "secret_sauce");
-            var itemName = driver.FindElement(By.XPath("//div[normalize-space()='" + item + "']"));
+            IWebElement itemName;
+            try
+            {
+                itemName = driver.FindElement(By.XPath("//div[normalize-space()='" + item + "']"));
+            }
+            catch (Exception noItem)
+            {
+                Console.WriteLine("Unable to find item: " + noItem.Message);
+                throw new Exception();
+            }
             var itemNameText = itemName.Text.ToLower();
             var itemNameTextWithCart = "add to cart " + itemNameText;
             var itemNameTextWithCartAndDash = itemNameTextWithCart.Replace(" ", "-");
