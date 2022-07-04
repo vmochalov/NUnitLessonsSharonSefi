@@ -24,46 +24,6 @@ namespace NUnitLessonsSharonSefi
             driver.Navigate().GoToUrl("https://www.saucedemo.com/");
         }
 
-        /////////////////////////////////////////////////////////////////////////
-        /////
-        ///// Rough draft of TestCaseSource
-        ///// ....Not working :(
-        ///// 
-        /////////////////////////////////////////////////////////////////////////
-
-
-        //public static IEnumerable<TestCaseData> ItemTestCases
-        //{
-        //    get
-        //    {
-        //        // B
-        //        //yield return new TestCaseData(new Item
-        //        //{
-        //        //    itemName = "group",
-        //        //    itemDesc = "description",
-        //        //    itemPrice = 11.11,
-        //        //    itemImage = "dsdwadqdw",
-        //        //    hasAddToCart = true
-        //        //}).SetName("ThisIsNameOfTest1");
-
-                
-        //        //TODO   Fix ) 
-        //        TestCaseData testCaseData = new TestCaseData(new Item("Sauce Labs Backpack",
-        //            "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
-        //            29.99, "https://www.saucedemo.com/static/media/sauce-backpack-1200x1500.34e7aa42.jpg")).SetName("Test Backpack");
-        //        yield return testCaseData;
-               
-        //    }
-        //}
-
-
-        //[TestCaseSource("ItemTestCases")]
-
-        //[Description("Dynamic group crate tests cases with image compare ")]
-
-        ////////////////////////////////////////////////////////////////////////////
-
-
         [TearDown]
         public void AnyException()
         {
@@ -89,6 +49,14 @@ namespace NUnitLessonsSharonSefi
         /// </summary>
         /// <param name="userName">User name</param>
         /// <param name="password">User password</param>
+        
+        // TODO: separate areas
+        // TODO: new class (and new file) LoginService and move function
+        // TODO: rename UnitTest1
+        // TODO: new class with tests, new class with setup
+        // TODO: new branch with my own structure
+        // TODO: new class with objects
+        // TODO: open file and read from it
         public void LoginProcess(string userName , string password)
         {
             var userNameField = driver.FindElement(By.XPath("//input[@id='user-name']"));
@@ -124,9 +92,9 @@ namespace NUnitLessonsSharonSefi
             try
             {
                 itemName = driver.FindElement(By.XPath("//div[normalize-space()='" + item + "']"));
-            }
+            } // TODO: swallow exception (read about it)
             catch (Exception noItem)
-            {
+            { // TODO: message to string - exception message clear with all information
                 Console.WriteLine("Unable to find item: " + noItem.Message);
                 throw new Exception();
             }
