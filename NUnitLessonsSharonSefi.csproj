@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sharon\LoginFxn.cs" />
+    <Compile Include="Sharon\LoginService.cs" />
     <Compile Include="Objects.cs" />
     <Compile Include="Sharon\SharonTest.cs" />
     <Compile Include="UnitTest1.cs" />

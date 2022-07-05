@@ -20,11 +20,26 @@ namespace NUnitLessonsSharonSefi
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            
+        }
+
+        // Test case with valid username and password
+        [TestCase ("standard_user", "secret_sauce")]
+        public void LogInByUnPassword(string username, string password)
+        {
+            // Call method
+            var loginService = new LoginService();
+            loginService.LoginByUserPass(username, password, driver);
+
+            // Assert log in is successful
+            string expectedUrl = "https://www.saucedemo.com/inventory.html";
+            string actualUrl = driver.Url;
+            Assert.That(actualUrl, Is.EqualTo(expectedUrl));
+            // What message will appear if pass/fail
+
         }
 
 
-        
 
         [TearDown]
         public void AnyException()
