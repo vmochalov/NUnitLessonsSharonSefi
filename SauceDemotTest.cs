@@ -11,38 +11,9 @@ using OpenQA.Selenium.Support.UI;
 
 namespace NUnitLessonsSharonSefi
 {
-    [TestFixture]
-    public class SauceDemotTest
+    
+    public class SauceDemotTest : BaseTest
     {
-        ChromeDriver driver;
-
-        [SetUp]
-        public void LoadDriver()
-        {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://www.saucedemo.com/");
-        }
-
-        [TearDown]
-        public void AnyException()
-        {
-            try
-            {
-                driver.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Unable to close driver: " + ex.Message);
-                throw new Exception();
-            }
-        }
-
-        [OneTimeTearDown]
-        public void QuitDriver()
-        {
-            driver.Quit();
-        }
 
         /// <summary>
         /// This is login function
@@ -51,21 +22,11 @@ namespace NUnitLessonsSharonSefi
         /// <param name="password">User password</param>
         
         // TODO: separate areas
-        // TODO: new class (and new file) LoginService and move function
         // TODO: rename UnitTest1
-        // TODO: new class with tests, new class with setup
         // TODO: new branch with my own structure
         // TODO: new class with objects
         // TODO: open file and read from it
-        public void LoginProcess(string userName , string password)
-        {
-            var userNameField = driver.FindElement(By.XPath("//input[@id='user-name']"));
-            userNameField.SendKeys(userName);
-            var passwordField = driver.FindElement(By.XPath("//input[@id='password']"));
-            passwordField.SendKeys(password);
-            var loginButton = driver.FindElement(By.XPath("//input[@id='login-button']"));
-            loginButton.Click();
-        }
+
 
         public static IEnumerable<TestCaseData> ItemsWithDescriptionsAndPrices
         {
@@ -87,7 +48,9 @@ namespace NUnitLessonsSharonSefi
         [TestCaseSource(nameof(ItemsWithDescriptionsAndPrices))]
         public void AddItemToCartByName(string item, string itemDescription, double itemPrice)
         {
-            LoginProcess("standard_user", "secret_sauce");
+            LoginService LoginService = new LoginService();
+            LoginService.LoginProcess("standard_user", "secret_sauce");
+
             IWebElement itemName;
             try
             {
