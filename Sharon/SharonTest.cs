@@ -11,18 +11,13 @@ using System.Diagnostics;
 namespace NUnitLessonsSharonSefi
 {
     [TestFixture]
-    public class SharonTest
+    public class SharonTest : BaseTest
     {
-        ChromeDriver driver;
-
-        [SetUp]
-        public void LoadDriver()
-        {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            
-        }
-
+        
+        // driver : set up
+        //close driver : tear down 
+        
+        
         // Test case with valid username and password
         [TestCase ("standard_user", "secret_sauce")]
         public void LogInByUnPassword(string username, string password)
@@ -36,30 +31,6 @@ namespace NUnitLessonsSharonSefi
             string actualUrl = driver.Url;
             Assert.That(actualUrl, Is.EqualTo(expectedUrl));
             // What message will appear if pass/fail
-
         }
-
-
-
-        [TearDown]
-        public void AnyException()
-        {
-            try
-            {
-                driver.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Unable to close driver: " + ex.Message);
-                throw new Exception();
-            }
-        }
-
-        [OneTimeTearDown]
-        public void QuitDriver()
-        {
-            driver.Quit();
-        }
-
     }
 }
