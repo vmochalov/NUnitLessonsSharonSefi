@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NUnitLessonsSharonSefi
 {
-    //Item class
+    //Item class ד
     public class Item
     {
         // Item name
